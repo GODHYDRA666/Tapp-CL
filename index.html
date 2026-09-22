@@ -5,7 +5,7 @@
     <meta charSet="utf-8" data-next-head=""/>
     <meta name="viewport" content="width=device-width" data-next-head=""/>
     <title data-next-head="">Login</title>
-    <link href="https://tappenlinea.tapp.cl/favicon.png" rel="icon" data-next-head=""/>
+    <link href="favicon.png" rel="icon" data-next-head=""/>
     <link rel="preload" href="https://tappenlinea.tapp.cl/_next/static/media/904be59b21bd51cb-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/>
     <link rel="preload" href="https://tappenlinea.tapp.cl/_next/static/css/bcb4f787c5363d7e.css" as="style"/>
     <link rel="stylesheet" href="https://tappenlinea.tapp.cl/_next/static/css/bcb4f787c5363d7e.css" data-n-g=""/>
@@ -107,11 +107,11 @@
                       <div class="flex flex-col gap-2">
                         <div class="flex w-full flex-col">
                           <label class="mb-2 flex text-sm font-medium leading-6 text-headline-secondary" for="rut">
-                            <span>RUT</span></label>
+                            <span>RUT</span><span style="color: red;">*</span></label>
                           <div class="relative w-full">
                             <input name="rut" class="h-10 w-full rounded-md border py-3 pl-3 pr-9 text-sm text-text-primary outline-0 placeholder-shown:text-message-disabled read-only:border-neutral-gray-3 read-only:bg-neutral-white read-only:text-message-disabled disabled:border-neutral-gray-3 disabled:bg-neutral-white disabled:text-message-disabled sm:py-4 md:h-12 border-stroke-tertiary focus:border-stroke-secondary" id="rut" placeholder="12.345.678-9" type="rut" value=""/></div></div>
                         <div class="flex w-full flex-col">
-                          <label class="mb-2 flex text-sm font-medium leading-6 text-headline-secondary" for="password"><span>Clave</span></label>
+                          <label class="mb-2 flex text-sm font-medium leading-6 text-headline-secondary" for="password"><span>Clave</span><span style="color: red;">*</span></label>
                           <div class="relative w-full">
                             <input name="password" class="h-10 w-full rounded-md border py-3 pl-3 text-sm text-text-primary outline-0 placeholder-shown:text-message-disabled read-only:border-neutral-gray-3 read-only:bg-neutral-white read-only:text-message-disabled disabled:border-neutral-gray-3 disabled:bg-neutral-white disabled:text-message-disabled sm:py-4 md:h-12 border-stroke-tertiary focus:border-stroke-secondary pr-11" id="password" placeholder="Ingresa tu clave" type="password" value=""/>
                             <button class="absolute right-4 top-1/2 -translate-y-1/2" type="button">
@@ -132,10 +132,10 @@
                       <hr class="w-full border-neutral-gray-2 lg:hidden"/>
                       <div class="flex flex-col items-center justify-center gap-1 text-sm lg:hidden">
                         <p class="font-normal text-text-primary">¿Primera vez ingresando a <strong class="font-bold">Tappenlínea</strong>? </p>
-                        <a class="inline-flex flex-row items-center gap-3 transition-colors data-[disabled=true]:pointer-events-none text-headline-primary hover:underline active:text-headline-secondary data-[disabled=true]:text-neutral-gray-4 text-sm font-semibold" role="link" href="/crear-cuenta"><span> Crea tu clave de acceso</span></a></div></form>
+                        <a class="inline-flex flex-row items-center gap-3 transition-colors data-[disabled=true]:pointer-events-none text-headline-primary hover:underline active:text-headline-secondary data-[disabled=true]:text-neutral-gray-4 text-sm font-semibold" role="link" href="#"><span> Crea tu clave de acceso</span></a></div></form>
                     <div class="mt-2 hidden justify-between rounded-xl bg-bg-tertiary px-4 py-4 text-sm shadow-2 lg:flex">
                       <p class="font-normal text-text-primary">¿Primera vez ingresando a <strong class="font-bold">Tapp Créditos</strong>? </p>
-                      <a class="inline-flex flex-row items-center gap-3 transition-colors data-[disabled=true]:pointer-events-none text-headline-primary hover:underline active:text-headline-secondary data-[disabled=true]:text-neutral-gray-4 text-sm font-semibold" role="link" href="/crear-cuenta"><span> Crea tu clave de acceso</span></a></div></div></div></div></div>
+                      <a class="inline-flex flex-row items-center gap-3 transition-colors data-[disabled=true]:pointer-events-none text-headline-primary hover:underline active:text-headline-secondary data-[disabled=true]:text-neutral-gray-4 text-sm font-semibold" role="link" href="#"><span> Crea tu clave de acceso</span></a></div></div></div></div></div>
             <button class="flex cursor-pointer flex-row items-center justify-center fill-current outline-none p-3 bg-primary-dark hover:bg-primary !max-w-auto lg:rounded-l-full text-text-button-primary font-semibold lg:!w-auto !px-5 !py-3 shadow-1 text-sm fixed bottom-0 right-0 w-full max-w-full lg:absolute lg:bottom-auto lg:right-0 lg:top-8 lg:w-auto lg:max-w-none">
               <svg class="order-1 undefined" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2.5C17.5078 2.5 22 6.99219 22 12.5C22 18.0469 17.5078 22.5 12 22.5C6.45312 22.5 2 18.0469 2 12.5C2 6.99219 6.45312 2.5 12 2.5ZM12 20.625C16.4531 20.625 20.125 16.9922 20.125 12.5C20.125 8.04688 16.4531 4.375 12 4.375C7.50781 4.375 3.875 8.04688 3.875 12.5C3.875 16.9922 7.50781 20.625 12 20.625ZM12 15.625C12.6641 15.625 13.25 16.1719 13.25 16.875C13.25 17.5781 12.6641 18.125 12 18.125C11.2578 18.125 10.75 17.5781 10.75 16.875C10.75 16.1719 11.2969 15.625 12 15.625ZM13.2891 7.5C14.8516 7.5 16.0625 8.71094 16.0234 10.2344C16.0234 11.1719 15.5156 12.0703 14.6953 12.5781L12.9375 13.6719V13.75C12.9375 14.2578 12.5078 14.6875 12 14.6875C11.4922 14.6875 11.0625 14.2578 11.0625 13.75V13.125C11.0625 12.8125 11.2188 12.5 11.5312 12.3047L13.7578 10.9766C14.0312 10.8203 14.1875 10.5469 14.1875 10.2344C14.1875 9.76562 13.7578 9.375 13.25 9.375H11.2578C10.7891 9.375 10.4375 9.76562 10.4375 10.2344C10.4375 10.7422 10.0078 11.1719 9.5 11.1719C8.99219 11.1719 8.5625 10.7422 8.5625 10.2344C8.5625 8.71094 9.77344 7.5 11.2969 7.5H13.2891Z"></path></svg>
